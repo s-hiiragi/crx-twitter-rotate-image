@@ -33,8 +33,8 @@ function observeMain(targetNode) {
             return;
         }
         if (targetNode.children.length == 2) {
-            retryCount = 20;  // 10秒ほどリトライする
-            setTimeout(preAddButton, 500);
+            retryCount = 5 * 10;  // 10秒ほどリトライする
+            setTimeout(preAddButton, 200);
         }
     });
     observer.observe(targetNode, config);
