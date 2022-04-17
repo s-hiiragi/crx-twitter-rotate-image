@@ -1,0 +1,20 @@
+{
+    "name": "twitter-rotate-image",
+    "version": "1.0.0",
+    "description": "Rotate the image displayed on the front of Twitter by 90 degrees",
+    "manifest_version": 3,
+    "content_scripts": [
+        {
+            "matches": [
+                "https://twitter.com/*"
+            ],
+            "js": [
+                "inject.js"
+            ],
+            "all_frames": true
+        }
+    ],
+    "host_permissions": [
+        "https://twitter.com/*"
+    ]
+}
