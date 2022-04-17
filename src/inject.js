@@ -57,7 +57,11 @@ function preAddButton() {
 }
 
 function addRotateButton() {
-    const imgNumber = Number(location.pathname.match(/\d+$/)[0]);
+    if (!/^\/\w+\/status\/\d+\/photo\/\d$/.test(location.pathname)) {
+        return;
+    }
+
+    const imgNumber = Number(location.pathname.match(/\d$/)[0]);
     const imgContainer = document.querySelectorAll('[aria-label="画像"]').item(imgNumber - 1);
 
     imgContainer.dataset.deg = 0;
