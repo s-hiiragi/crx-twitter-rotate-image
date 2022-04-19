@@ -1,7 +1,7 @@
 // TODO 画像の両脇の矢印ボタンを押して画像を切り替えた際にも回転ボタンを表示する
 // TODO ボタンが一度表示された後に消えることがある
 // TODO ボタンが表示された状態でウィンドウサイズを変えると正しく動作しない
-// TODO 画像の両脇をクリックしても画像が閉じない
+// TODO 画像をクリックすると閉じてしまう
 
 //console.log('inject');
 
@@ -72,6 +72,11 @@ function addRotateButton() {
     const sizeDiv = imgContainer.parentNode.parentNode;
     sizeDiv.style.width = window.getComputedStyle(sizeDiv.parentNode).width;
 
+    const closeDiv = sizeDiv.parentNode.parentNode.parentNode;
+    imgContainer.addEventListener('click', (event) => {
+        closeDiv.click();
+    });
+
     const rotateButton = document.createElement('button');
     rotateButton.textContent = '左90°回転';
     rotateButton.style.cssText = `
@@ -81,9 +86,11 @@ function addRotateButton() {
         bottom: 0px;
     `;
     rotateButton.onclick = (event) => {
+        event.stopPropagation();
+
         const newDeg = Number(imgContainer.dataset.deg) - 90;
         imgContainer.dataset.deg = newDeg;
         imgContainer.children[0].style.transform = `rotateZ(${newDeg}deg)`;
     };
-    imgContainer.appendChild(rotateButton);
+    sizeDiv.parentNode.appendChild(rotateButton);
 }
